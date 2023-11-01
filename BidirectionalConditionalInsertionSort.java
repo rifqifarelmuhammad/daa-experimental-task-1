@@ -49,9 +49,7 @@ public class BidirectionalConditionalInsertionSort {
         int sortedRight = right;
 
         while (sortedLeft < sortedRight) {
-            if (A[sortedLeft] > A[sortedRight]) {
-                swap(sortedLeft, sortedRight);
-            }
+            if (A[sortedLeft] > A[sortedRight]) swap(sortedLeft, sortedRight);
 
             int idx = sortedLeft + 1;
             while (idx < sortedRight) {
@@ -65,9 +63,7 @@ public class BidirectionalConditionalInsertionSort {
                     A[idx] = A[sortedRight - 1];
                     insertionSortRight(currentElement, sortedRight, right);
                     sortedRight--;
-                } else {
-                    idx++;
-                }
+                } else idx++;
             }
 
             sortedLeft++;
