@@ -49,8 +49,6 @@ public class BidirectionalConditionalInsertionSort {
         int sortedRight = right;
 
         while (sortedLeft < sortedRight) {
-            swap(sortedRight, sortedLeft + (int)((sortedRight - sortedLeft)/2));
-
             if (A[sortedLeft] > A[sortedRight]) {
                 swap(sortedLeft, sortedRight);
             }
@@ -58,15 +56,15 @@ public class BidirectionalConditionalInsertionSort {
             int idx = sortedLeft + 1;
             while (idx < sortedRight) {
                 int currentElement = A[idx];
-                if (currentElement >= A[sortedRight]) {
-                    A[idx] = A[sortedRight - 1];
-                    insertionSortRight(currentElement, sortedRight, right);
-                    sortedRight--;
-                } else if (currentElement <= A[sortedLeft]) {
+                if (currentElement <= A[sortedLeft]) {
                     A[idx] = A[sortedLeft + 1];
                     insertionSortLeft(currentElement, sortedLeft, left);
                     sortedLeft++;
                     idx++;
+                } else if (currentElement >= A[sortedRight]) {
+                    A[idx] = A[sortedRight - 1];
+                    insertionSortRight(currentElement, sortedRight, right);
+                    sortedRight--;
                 } else {
                     idx++;
                 }
@@ -77,20 +75,20 @@ public class BidirectionalConditionalInsertionSort {
         }
     }
 
-    public static void insertionSortRight(int currentElement, int j, int right) {
-        while (j <= right && currentElement > A[j]) {
-            A[j - 1] = A[j];
-            j++;
-        }
-        A[j - 1] = currentElement;
-    }
-
     public static void insertionSortLeft(int currentElement, int j, int left) {
         while (j >= left && currentElement < A[j]) {
             A[j + 1] = A[j];
             j--;
         }
         A[j + 1] = currentElement;
+    }
+
+    public static void insertionSortRight(int currentElement, int j, int right) {
+        while (j <= right && currentElement > A[j]) {
+            A[j - 1] = A[j];
+            j++;
+        }
+        A[j - 1] = currentElement;
     }
 
     public static void swap(int i, int j) {
