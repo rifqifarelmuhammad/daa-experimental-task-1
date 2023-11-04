@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
+// Bidirectional Conditional Insertion Sort menggunakan zero-based indexing
 public class BidirectionalConditionalInsertionSort {
     static InputReader in;
     static PrintWriter out;
@@ -31,7 +32,7 @@ public class BidirectionalConditionalInsertionSort {
         // double executionMemory = startMemory - endMemory;
 
         out.println("Jumlah data: " + lotsOfData);
-        out.println("Waktu eksekusi: " + executionTime);
+        out.println("Waktu eksekusi: " + executionTime + " ms");
         // out.println("Memory eksekusi: " + executionMemory);
         out.println("Data yang telah terurut menggunakan Bidirectional Conditional Insertion Sort:");
         
@@ -43,25 +44,38 @@ public class BidirectionalConditionalInsertionSort {
     }
 
     public static void bidirectionalConditionalInsertionSort() {
-        int left = 0;
-        int right = A.length - 1;
-        int sortedLeft = left;
-        int sortedRight = right;
+        int sortedLeft = 0;
+        int sortedRight = A.length - 1;
 
         while (sortedLeft < sortedRight) {
+            swap(sortedRight, sortedLeft + (int)(sortedRight - sortedLeft)/2);
+            
+            if (A[sortedLeft] == A[sortedRight]) {
+                if (isEqual(sortedLeft, sortedRight) == -1) return;
+            }
+
             if (A[sortedLeft] > A[sortedRight]) swap(sortedLeft, sortedRight);
 
+            if (sortedRight - sortedLeft >= 100) {
+                for (int i = sortedLeft + 1; i < (int)(Math.sqrt(sortedRight - sortedLeft) + 1); i++) {
+                    if (A[sortedRight] < A[i]) swap(sortedRight, i); 
+                    else if (A[sortedLeft] > A[i]) swap(sortedLeft, i);
+                }
+            }
+
             int idx = sortedLeft + 1;
+            int leftElement = A[sortedLeft];
+            int rightElement = A[sortedRight];
             while (idx < sortedRight) {
                 int currentElement = A[idx];
-                if (currentElement <= A[sortedLeft]) {
+                if (currentElement <= leftElement) {
                     A[idx] = A[sortedLeft + 1];
-                    insertionSortLeft(currentElement, sortedLeft, left);
+                    insertionSortLeft(currentElement, sortedLeft, 0);
                     sortedLeft++;
                     idx++;
-                } else if (currentElement >= A[sortedRight]) {
+                } else if (currentElement >= rightElement) {
                     A[idx] = A[sortedRight - 1];
-                    insertionSortRight(currentElement, sortedRight, right);
+                    insertionSortRight(currentElement, sortedRight, A.length - 1);
                     sortedRight--;
                 } else idx++;
             }
@@ -91,6 +105,16 @@ public class BidirectionalConditionalInsertionSort {
         int temp = A[i];
         A[i] = A[j];
         A[j] = temp;
+    }
+
+    public static int isEqual(int sortedLeft, int sortedRight) {
+        for (int k = sortedLeft + 1; k < sortedRight; k++) {
+            if (A[k] != A[sortedLeft]) {
+                swap(k, sortedLeft);
+                return k;
+            }
+        }
+        return -1;
     }
 
     // taken from https://codeforces.com/submissions/Petr

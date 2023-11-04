@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
+// Counting Sort menggunakan zero-based indexing
 public class CountingSort {
     static InputReader in;
     static PrintWriter out;
@@ -25,17 +26,16 @@ public class CountingSort {
             A[i] = in.nextInt();
         }
         
-        int maxValue = findMaxValue();
-        
         long startTime = System.currentTimeMillis();
         // long startMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        int maxValue = findMaxValue();
         countingSort(maxValue);
         // long endMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         long executionTime = System.currentTimeMillis() - startTime;
         // double executionMemory = startMemory - endMemory;
 
         out.println("Jumlah data: " + lotsOfData);
-        out.println("Waktu eksekusi: " + executionTime);
+        out.println("Waktu eksekusi: " + executionTime + " ms");
         // out.println("Memory eksekusi: " + executionMemory);
         out.println("Data yang telah terurut menggunakan Counting Sort:");
 
@@ -59,7 +59,6 @@ public class CountingSort {
     }
 
     static void countingSort(int maxValue) {
-        //Counting Sort menggunakan zero-based indexing
         int[] C = new int[maxValue + 1];
 
         for (int i = 0; i < A.length; i++) {
