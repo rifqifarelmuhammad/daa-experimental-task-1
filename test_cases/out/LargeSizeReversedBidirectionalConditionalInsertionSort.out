@@ -1,5 +1,6 @@
 Jumlah data: 50000
-Waktu eksekusi: 208 ms
+Waktu eksekusi: 136 ms
+Memory eksekusi: 0.0 MB
 Data yang telah terurut menggunakan Bidirectional Conditional Insertion Sort:
 0
 1

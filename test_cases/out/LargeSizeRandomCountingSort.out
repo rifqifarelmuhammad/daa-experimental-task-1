@@ -1,5 +1,6 @@
 Jumlah data: 50000
-Waktu eksekusi: 3 ms
+Waktu eksekusi: 4 ms
+Memory eksekusi: 0.38150787353515625 MB
 Data yang telah terurut menggunakan Counting Sort:
 0
 0

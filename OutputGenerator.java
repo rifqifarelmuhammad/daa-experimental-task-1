@@ -10,7 +10,7 @@ public class OutputGenerator {
         "LargeSizeRandom",
         "LargeSizeReversed",
     };
-    static String FILE_NAME = "BidirectionalConditionalInsertionSort";
+    static String FILE_NAME = "CountingSort";
 
     public static void main(String[] args) {
         ProcessBuilder processBuilder = new ProcessBuilder();

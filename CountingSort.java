@@ -21,22 +21,23 @@ public class CountingSort {
 
         int lotsOfData = in.nextInt();
         A = new int[lotsOfData];
-        B = new int[lotsOfData];
         for (int i = 0; i < lotsOfData; i++) {
             A[i] = in.nextInt();
         }
         
-        long startTime = System.currentTimeMillis();
-        // long startMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         int maxValue = findMaxValue();
+        long startTime = System.currentTimeMillis();
+        long startUsedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
         countingSort(maxValue);
-        // long endMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
         long executionTime = System.currentTimeMillis() - startTime;
-        // double executionMemory = startMemory - endMemory;
+        long endUsedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        double executionMemory = (double) (endUsedMemory - startUsedMemory) / 1024 / 1024;
 
         out.println("Jumlah data: " + lotsOfData);
         out.println("Waktu eksekusi: " + executionTime + " ms");
-        // out.println("Memory eksekusi: " + executionMemory);
+        out.println("Memory eksekusi: " + executionMemory + " MB");
         out.println("Data yang telah terurut menggunakan Counting Sort:");
 
         for (int i = 0; i < lotsOfData; i++) {
@@ -59,6 +60,7 @@ public class CountingSort {
     }
 
     static void countingSort(int maxValue) {
+        B = new int[A.length];
         int[] C = new int[maxValue + 1];
 
         for (int i = 0; i < A.length; i++) {

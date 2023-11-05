@@ -25,15 +25,17 @@ public class BidirectionalConditionalInsertionSort {
         }
 
         long startTime = System.currentTimeMillis();
-        // long startMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        long startUsedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
         bidirectionalConditionalInsertionSort();
-        // long endMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
         long executionTime = System.currentTimeMillis() - startTime;
-        // double executionMemory = startMemory - endMemory;
+        long endUsedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        double executionMemory = (double) (endUsedMemory - startUsedMemory) / 1024 / 1024;
 
         out.println("Jumlah data: " + lotsOfData);
         out.println("Waktu eksekusi: " + executionTime + " ms");
-        // out.println("Memory eksekusi: " + executionMemory);
+        out.println("Memory eksekusi: " + executionMemory + " MB");
         out.println("Data yang telah terurut menggunakan Bidirectional Conditional Insertion Sort:");
         
         for (int i = 0; i < lotsOfData; i++) {
